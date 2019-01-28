@@ -1,5 +1,6 @@
 import $ from 'jquery';
 import datatables from 'datatables.net-dt';
+import uniqueId from 'lodash/uniqueId';
 
 import data from './data';
 
@@ -9,4 +10,18 @@ $('#code-container').text(
 );
 
 // Initialize table
-$('#table-container').DataTable(data)
+const table = $('#table-container').DataTable(data)
+
+// Adding new entries
+const nameInput = $('#new-name');
+$('#add-new-name').click(() => {
+  const name = nameInput.val();
+  nameInput.val('');
+
+  table.row.add({
+    id: uniqueId('new-'),
+    name,
+    occupation: 'no occupation given',
+    new: true,
+  }).draw();
+});
