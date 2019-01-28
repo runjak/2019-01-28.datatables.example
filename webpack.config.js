@@ -1,27 +1,20 @@
-const path = require('path');
-const HtmlWebpackPlugin = require('html-webpack-plugin');
-const CleanWebpackPlugin = require('clean-webpack-plugin');
 const webpack = require('webpack');
 
 module.exports = {
   mode: 'development',
-  entry: {
-    app: './src/index.js'
-  },
+  context: __dirname,
+  entry: [
+    'webpack-hot-middleware/client?path=/__webpack_hmr&timeout=20000',
+    './src/index.js',
+  ],
   devtool: 'inline-source-map',
-  devServer: {
-    contentBase: './dist',
-    // hot: true
-  },
   plugins: [
-    new CleanWebpackPlugin(['dist']),
-    new HtmlWebpackPlugin({
-      title: 'Hot Module Replacement'
-    }),
-    new webpack.HotModuleReplacementPlugin()
+    new webpack.HotModuleReplacementPlugin(),
+    new webpack.NoEmitOnErrorsPlugin(),
   ],
   output: {
-    filename: '[name].bundle.js',
-    path: path.resolve(__dirname, 'dist')
-  }
+    filename: 'bundle.js',
+    path: __dirname,
+    publicPath: '/',
+  },
 };
