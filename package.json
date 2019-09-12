@@ -13,7 +13,7 @@
   "dependencies": {
     "datatables.net-dt": "^1.10.19",
     "jquery": "^3.4.0",
-    "lodash": "^4.17.11"
+    "lodash": "^4.17.13"
   },
   "scripts": {
     "build": "webpack",
